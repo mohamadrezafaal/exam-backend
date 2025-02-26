@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  duty-army-back:
+        image: exam-back-img
+        restart: always
+        ports:  
+          - "3004:3004"
+        env_file:
+          - .env
+        extra_hosts:
+          - "localhost:127.0.0.1"
