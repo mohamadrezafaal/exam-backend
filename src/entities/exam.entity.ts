@@ -7,8 +7,10 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ExamQuestion } from './exam-question.entity';
 
 @Entity({
   schema: 'exam',
@@ -61,12 +63,14 @@ export class Exam extends AuditedEntity {
   @AutoMap(() => BaseInfoItem)
   examHold: BaseInfoItem;
 
-  // @ApiProperty()
-  // @AutoMap()
-  // @OneToMany(() => Question, (question) => question.exam, {
+  @ApiProperty()
+  @AutoMap()
+  @OneToMany(() => ExamQuestion, (examquestion) => examquestion.exam
+  // , {
   //   cascade: true,
   //   eager: true, // باعث می شود هنگام QUERY زدن به صورت اتوماتیک در لیست آورده شود
   //   orphanedRowAction: 'delete',
-  // })
-  // questions: Question[];
+  // }
+)
+  examquestions: ExamQuestion[];
 }

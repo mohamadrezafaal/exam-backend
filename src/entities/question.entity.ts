@@ -12,6 +12,7 @@ import {
     OneToMany,
     PrimaryGeneratedColumn,
 } from 'typeorm';
+import { ExamQuestion } from './exam-question.entity';
 
 @Entity({
   schema: 'exam',
@@ -48,18 +49,6 @@ export class Question extends BaseEntity {
   @ApiProperty()
   difficultyLevel: 'easy' | 'medium' | 'hard';
 
-  // @Column({ name: 'ExamId' })
-  // @AutoMap()
-  // examId: number;
-
-  // @ManyToOne(() => Exam, (exam) => exam.questions, {
-  //   onDelete: 'CASCADE',
-  //   orphanedRowAction: 'delete',
-  // })
-  // @JoinColumn({ name: 'ExamId' })
-  // @AutoMap(() => Exam)
-  // exam: Exam;
-
   @ApiProperty()
   @AutoMap()
   @OneToMany(
@@ -86,12 +75,14 @@ export class Question extends BaseEntity {
   )
   options: QuestionOption[];
 
-  //   @ApiProperty()
-  //   @AutoMap()
-  //   @OneToMany(() => Answer, (answer) => answer.question, {
-  //     cascade: true,
-  //     eager: true, // باعث می شود هنگام QUERY زدن به صورت اتوماتیک در لیست آورده شود
-  //     orphanedRowAction: 'delete',
-  //   })
-  //   answers: Answer[];
+    @ApiProperty()
+    @AutoMap()
+    @OneToMany(() => ExamQuestion, (examquestion) => examquestion.question
+    // , {
+    //   cascade: true,
+    //   eager: true, // باعث می شود هنگام QUERY زدن به صورت اتوماتیک در لیست آورده شود
+    //   orphanedRowAction: 'delete',
+    // }
+  )
+    examquestions: ExamQuestion[];
 }
